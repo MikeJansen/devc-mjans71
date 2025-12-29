@@ -172,6 +172,11 @@ RUN cat /home/$USERNAME/.zshrc.antidote >> /home/$USERNAME/.zshrc && rm /home/$U
 COPY .p10k.zsh /home/$USERNAME/.p10k.zsh
 RUN mkdir -p "${HOME}/.local/state/shell"
 
+# Homebrew
+RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.zshrc && \
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 USER root
 
 # Clean up

@@ -1,0 +1,33 @@
+# --- Enable Oh My Zsh support (recommended for OMZ plugins) ---
+getantidote/use-omz
+
+# --- Core productivity ---
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/z
+ohmyzsh/ohmyzsh path:plugins/history-substring-search
+ohmyzsh/ohmyzsh path:plugins/sudo
+ohmyzsh/ohmyzsh path:plugins/extract
+ohmyzsh/ohmyzsh path:plugins/command-not-found
+
+# --- Cloud & containers ---
+ohmyzsh/ohmyzsh path:plugins/kubectl
+ohmyzsh/ohmyzsh path:plugins/helm
+ohmyzsh/ohmyzsh path:plugins/docker
+ohmyzsh/ohmyzsh path:plugins/aws
+
+# --- Languages ---
+ohmyzsh/ohmyzsh path:plugins/golang
+ohmyzsh/ohmyzsh path:plugins/node
+
+# --- fzf integration ---
+ohmyzsh/ohmyzsh path:plugins/fzf
+
+# --- Prompt / UI ---
+romkatv/powerlevel10k
+
+# --- Typing helpers (autoloaded late) ---
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting
+
+# --- autocompletes ---
+azure/azure-cli kind:fpath path:az.completion

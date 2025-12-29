@@ -161,7 +161,8 @@ RUN curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/insta
     nvm alias default ${NODE_VERSION} && \
     echo "NVM_DIR=\"$HOME/.nvm\"" >> "$HOME/.zshrc" && \
     echo "[ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\" # This loads nvm" >> "$HOME/.zshrc" && \
-    echo "[ -s \"$NVM_DIR/bash_completion\" ] && \. \"$NVM_DIR/bash_completion\" # This loads nvm bash_completion" >> "$HOME/.zshrc"
+    echo "[ -s \"$NVM_DIR/bash_completion\" ] && \. \"$NVM_DIR/bash_completion\" # This loads nvm bash_completion" >> "$HOME/.zshrc" && \
+    npm install -g pnpm
 
 # Install GitHub Copilot VS Code extension CLI
 RUN export NVM_DIR="$HOME/.nvm" && \

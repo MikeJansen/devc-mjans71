@@ -133,6 +133,11 @@ RUN ARCH=$(dpkg --print-architecture) && \
 # Install uv (Python package manager)
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
+
+# Install python
+RUN apt-get install -y python3.12 python3.12-venv && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
+
 # k9s
 RUN curl -s https://api.github.com/repos/derailed/k9s/releases/latest | \
     jq -r '.assets[] | select(.name | contains("k9s_linux_arm64.deb")) | .browser_download_url' | \

@@ -184,7 +184,9 @@ RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.co
 
 # pulumi
 RUN eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && \
-    brew install pulumi
+    brew tap pulumi/tap && \
+    brew install pulumi/tap/pulumi && \
+    brew install pulumi/tap/esc
 
 # pre-commit
 RUN eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && \

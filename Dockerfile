@@ -186,6 +186,10 @@ RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.co
 RUN eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && \
     brew install pulumi
 
+# pre-commit
+RUN eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && \
+    brew install pre-commit
+
 # ZSH customizations
 RUN echo "setopt HIST_IGNORE_SPACE" >> /home/$USERNAME/.zshrc
 

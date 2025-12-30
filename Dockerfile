@@ -180,8 +180,14 @@ RUN mkdir -p "${HOME}/.local/state/shell"
 
 # Homebrew
 RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
-    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.zshrc && \
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.zshrc 
+
+# pulumi
+RUN eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && \
+    brew install pulumi
+
+# ZSH customizations
+RUN echo "setopt HIST_IGNORE_SPACE" >> /home/$USERNAME/.zshrc
 
 USER root
 

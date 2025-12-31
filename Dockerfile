@@ -8,11 +8,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-ARG GO_VERSION=1.21.5
-ARG NVM_VERSION=0.39.7
-ARG NODE_VERSION=lts/*
-ARG JQ_VERSION=1.7
-ARG YQ_VERSION=v4.40.4
 
 # Update package lists and upgrade existing packages
 RUN apt-get update && apt-get upgrade -y
@@ -32,8 +27,7 @@ RUN apt-get install -y \
     nano \
     wget \
     unzip \
-    software-properties-common \
-    fzf 
+    software-properties-common
 
 # ============================================================================
 # USER AND GROUP SETUP
@@ -63,21 +57,12 @@ RUN mkdir -p /etc/apt/keyrings && \
     apt-get update && \
     apt-get install -y docker-ce containerd.io
 
-# Create cache directory and set up symlink structure for Azure CLI persistence
-RUN mkdir -p /dc/azure && \
-    chown -R $USERNAME:$USERNAME /dc/azure && \
-    chmod 700 /dc/azure && \
-    ln -sf /dc/azure /home/$USERNAME/.azure && \
-    chown -R $USERNAME:$USERNAME /home/$USERNAME/.azure && \
-    chmod 700 /home/$USERNAME/.azure
-
-# Create cache directory and set up symlink structure for GitHub CLI persistence
-RUN mkdir -p /dc/github-cli && \
-    chown -R $USERNAME:$USERNAME /dc/github-cli && \
-    chmod 700 /dc/github-cli && \
-    ln -sf /dc/github-cli /home/$USERNAME/.config/gh && \
-    chown -R $USERNAME:$USERNAME /home/$USERNAME/.config/gh && \
-    chmod 700 /home/$USERNAME/.config/gh
+COPY mkcachedir.sh /tmp/mkcachedir.sh
+RUN chmod 500 /tmp/mkcachedir.sh
+RUN /tmp/mkcachedir.sh azure $USERNAME /home/$USERNAME/.azure
+RUN /tmp/mkcachedir.sh github-cli $USERNAME /home/$USERNAME/.config/gh
+RUN /tmp/mkcachedir.sh pulumi $USERNAME /home/$USERNAME/.pulumi
+RUN rm /tmp/mkcachedir.sh
 
 ###############################################################################
 # USER-SPECIFIC SETUP

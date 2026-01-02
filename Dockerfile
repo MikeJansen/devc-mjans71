@@ -49,13 +49,14 @@ RUN if id "$USERNAME" >/dev/null 2>&1; then \
 # ROOT USER SETUP
 # ============================================================================
 
-# Install Docker/Moby engine
-RUN mkdir -p /etc/apt/keyrings && \
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
-    tee /etc/apt/sources.list.d/docker.list > /dev/null && \
-    apt-get update && \
-    apt-get install -y docker-ce containerd.io
+# Need to figure out minimal docker-in-docker setup later
+# # Install Docker/Moby engine
+# RUN mkdir -p /etc/apt/keyrings && \
+#     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
+#     echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
+#     tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+#     apt-get update && \
+#     apt-get install -y docker-ce containerd.io
 
 COPY mkcachedir.sh /tmp/mkcachedir.sh
 RUN chmod 500 /tmp/mkcachedir.sh
